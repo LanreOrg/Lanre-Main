@@ -9,7 +9,7 @@ DIRECTORIES="${DIRECTORIES} ./Src/Apis/discounts/"
 DIRECTORIES="${DIRECTORIES} ./Src/Services/identityServer/"
 DIRECTORIES="${DIRECTORIES} ./Src/Clients/WebStatus/"
 DIRECTORIES="${DIRECTORIES} ./Src/Clients/lanreshop/"
-DIRECTORIES="${DIRECTORIES} ./Src/BFFs/Lanre-WebApi/"
+DIRECTORIES="${DIRECTORIES} ./Src/BFFs/Lanre-BFF-WebApi/"
 
 echo '-- Commit in repos'
 
