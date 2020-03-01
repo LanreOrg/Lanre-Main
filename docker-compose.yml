@@ -22,14 +22,14 @@ services:
     image: ${DOCKER_REGISTRY-}shop-vue:${TAG:-latest}
     build:
       context: .
-      dockerfile: Src/Clients/lanreshop/Dockerfile
+      dockerfile: Src/Clients/lanreshop/Lanre-VueShop/Dockerfile
     networks:
       - docker-network
   webstatus:
     image: ${DOCKER_REGISTRY-}webstatus:${TAG:-latest}
     build:
       context: .
-      dockerfile: Src/Clients/WebStatus/Dockerfile
+      dockerfile: Src/Clients/WebStatus/Lanre-WebStatus/Dockerfile
     networks:
       - docker-network
   kibana:
@@ -40,11 +40,11 @@ services:
     networks:
       - docker-network
   # proxies, gateways
-  bff:
+  bff-webapi:
     image: ${DOCKER_REGISTRY-}bff:${TAG:-latest}
     build:
       context: .
-      dockerfile: Src/BFFs/Web/Lanre.Bffs.Web.Api/Dockerfile
+      dockerfile: Src/BFFs/Lanre-BFF-WebApi/Lanre.Bffs.Web.Api/Dockerfile
     networks:
       - docker-network
 
@@ -53,21 +53,21 @@ services:
     image: ${DOCKER_REGISTRY-}api-products:${TAG:-latest}
     build:
       context: .
-      dockerfile: Src/Apis/products/Lanre.Products.Host/Dockerfile
+      dockerfile: Src/Apis/products/Lanre-Products/Lanre.Products.Host/Dockerfile
     networks:
       - docker-network
   api-stock:
     image: ${DOCKER_REGISTRY-}api-stock:${TAG:-latest}
     build:
       context: .
-      dockerfile: Src/Apis/stock/Lanre.Stock.Api/Dockerfile
+      dockerfile: Src/Apis/stock/Lanre-Stock/Lanre.Stock.Api/Dockerfile
     networks:
       - docker-network
   identity:
     image: ${DOCKER_REGISTRY-}lanre-identity:${TAG:-latest}
     build:
       context: .
-      dockerfile: Src/Services/identityServer/Lanre.IdentityServer/Dockerfile
+      dockerfile: Src/Services/identityServer/Lanre-IdentityServer/Lanre.IdentityServer/Dockerfile
     networks:
       - docker-network
   elasticsearch:

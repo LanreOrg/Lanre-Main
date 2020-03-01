@@ -32,7 +32,7 @@ services:
     environment:
       - ELASTICSEARCH_HOSTS=${ELASTICSEARCH:-http://docker.for.win.internal:9200}
       - XPACK_MONITORING_ENABLED=true
-  bff:
+  bff-webapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - Apis__0__Uri=http://host.docker.internal:5380
