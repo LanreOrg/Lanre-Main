@@ -1,43 +1,83 @@
 version: '3.4'
 
 services:
+  # etls, service workers
   etl:
     image: ${DOCKER_REGISTRY-}etl:${TAG:-latest}
     build:
       context: .
       dockerfile: Src/ETL/Dockerfile
+    networks:
+      - docker-network
+
+  # clients
   web:
     image: ${DOCKER_REGISTRY-}websample:${TAG:-latest}
     build:
       context: .
       dockerfile: Src/Clients/Web/Dockerfile
+    networks:
+      - docker-network
   shop-vue:
     image: ${DOCKER_REGISTRY-}shop-vue:${TAG:-latest}
     build:
       context: .
       dockerfile: Src/Clients/lanreshop/Dockerfile
+    networks:
+      - docker-network
   webstatus:
     image: ${DOCKER_REGISTRY-}webstatus:${TAG:-latest}
     build:
       context: .
       dockerfile: Src/Clients/WebStatus/Dockerfile
+    networks:
+      - docker-network
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.6.0
+    container_name: kibana
+    depends_on:
+      - elasticsearch
+    networks:
+      - docker-network
+  # proxies, gateways
   bff:
     image: ${DOCKER_REGISTRY-}bff:${TAG:-latest}
     build:
       context: .
       dockerfile: Src/BFFs/Web/Lanre.Bffs.Web.Api/Dockerfile
+    networks:
+      - docker-network
+
+  # apis, services
   api-products:
     image: ${DOCKER_REGISTRY-}api-products:${TAG:-latest}
     build:
       context: .
       dockerfile: Src/Apis/products/Lanre.Products.Host/Dockerfile
+    networks:
+      - docker-network
   api-stock:
     image: ${DOCKER_REGISTRY-}api-stock:${TAG:-latest}
     build:
       context: .
       dockerfile: Src/Apis/stock/Lanre.Stock.Api/Dockerfile
+    networks:
+      - docker-network
   identity:
     image: ${DOCKER_REGISTRY-}lanre-identity:${TAG:-latest}
     build:
       context: .
       dockerfile: Src/Services/identityServer/Lanre.IdentityServer/Dockerfile
+    networks:
+      - docker-network
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.0
+    container_name: elasticsearch
+    networks:
+      - docker-network
+   
+
+
+networks:
+  docker-network:
+    driver: bridge

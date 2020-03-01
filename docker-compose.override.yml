@@ -24,6 +24,14 @@ services:
     ports:
       - "5080:80"
       - "50443:443"
+  kibana:
+    ports:
+      - "5680:5601"
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=${ELASTICSEARCH:-http://docker.for.win.internal:9200}
+      - XPACK_MONITORING_ENABLED=true
   bff:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -42,6 +50,9 @@ services:
       - Kestrel__EndPoints__Https__Url=https://+:443
       - Kestrel__Certificates__Default__Path=cert.pfx
       - Kestrel__Certificates__Default__Password=Pass@word
+      # - ElasticConfiguration__Uri=http://localhost:9200/
+      - ElasticConfiguration__Uri= ${ELASTICSEARCH:-http://docker.for.win.internal:9200}
+
     ports:
       - "5380:80"
       - "53443:443"
@@ -57,3 +68,15 @@ services:
     ports:
       - "1080:80"
       - "10443:443"
+  elasticsearch:
+    ports:
+      - "9200:9200"
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./elasticsearch-data/}:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=true
+      - xpack.watcher.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      

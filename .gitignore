@@ -4,6 +4,8 @@ Src/BFFs/**
 Src/Services/**
 Src/Clients/lanreshop/**
 Src/Clients/WebStatus/**
+Src/Shared/**
+
 
 
 *.swp
@@ -74,3 +76,4 @@ yarn-error.log*
 *.sw*
 
 tests-results
+elasticsearch-data
