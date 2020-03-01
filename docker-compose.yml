@@ -52,8 +52,8 @@ services:
   api-products:
     image: ${DOCKER_REGISTRY-}api-products:${TAG:-latest}
     build:
-      context: .
-      dockerfile: Src/Apis/products/Lanre-Products/Lanre.Products.Host/Dockerfile
+      context: Src/Apis/products/Lanre-Products/
+      dockerfile: Lanre.Products.Host/Dockerfile
     networks:
       - docker-network
   api-stock:

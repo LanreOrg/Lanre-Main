@@ -4,8 +4,8 @@ services:
   api-products-unit-tests:
     image: ${DOCKER_REGISTRY-}api-products-unit-test:${TAG:-latest}
     build:
-      context: .
-      dockerfile: Src/Apis/products/Lanre.Products.Api.UnitTests/Dockerfile
+      context: Src/Apis/products/Lanre-Products/
+      dockerfile: Lanre.Products.Api.UnitTests/Dockerfile
       target: unittest
     entrypoint:
         - dotnet
@@ -17,8 +17,8 @@ services:
   api-products-integration-tests:
     image: ${DOCKER_REGISTRY-}api-products-integration-test:${TAG:-latest}
     build:
-      context: .
-      dockerfile: Src/Apis/products/Lanre.Products.Api.IntegrationTests/Dockerfile
+      context: Src/Apis/products/Lanre-Products/
+      dockerfile: Lanre.Products.Api.IntegrationTests/Dockerfile
       target: integrationtests
     entrypoint:
         - dotnet
@@ -31,7 +31,7 @@ services:
     image: ${DOCKER_REGISTRY-}api-stock-unit-test:${TAG:-latest}
     build:
       context: .
-      dockerfile: Src/Apis/stock/Lanre.Stock.Api.UnitTests/Dockerfile
+      dockerfile: Src/Apis/stock/Lanre-Stock/Lanre.Stock.Api.UnitTests/Dockerfile
       target: unittest
     entrypoint:
         - dotnet
